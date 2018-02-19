@@ -17,9 +17,8 @@
 
 var friendsArray = [
   {
-    FriendID: "1",
-    name: "Friend Name",
-    photo: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    name: "Bill Gates",
+    photo: "https://goo.gl/images/WZhQqr",
     scores: [
     "1", 
     "2", 
@@ -31,7 +30,26 @@ var friendsArray = [
     "2", 
     "1", 
     "5"
-    ]
+    ],
+    totalScore:30
+  },
+
+  {
+    name: "Donald Trump",
+    photo: "https://goo.gl/images/sVhkYh",
+    scores: [
+    "2", 
+    "3", 
+    "3", 
+    "4", 
+    "5", 
+    "5", 
+    "5", 
+    "5", 
+    "1", 
+    "5"
+    ],
+    totalScore:41
   },
 ];
 

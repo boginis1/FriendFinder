@@ -16,8 +16,6 @@
 </head>
 
 <body>
-
-
     <div class="container">
         <h2>Survey Questions</h2>
         <hr>
@@ -132,31 +130,21 @@
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i> Submit
         </button>
-        <div id="results-modal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h2 class="modal-title"><strong>Best Match</strong></h2>
-                    </div>
-                    <div class="modal-body">
-                        <h2 id="match-name"></h2>
-                        <img id="match-img" src="https://en.wikipedia.org/wiki/Melinda_Gates#/media/File:Melinda_Gates_-_World_Economic_Forum_Annual_Meeting_2011.jpg" alt="">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+
+   
         <footer class="footer">
             <div class="container">
                 <p>Control Panel</p>
                 <p><a href="/api/friends">API Friends Link</a> | <a href="https://github.com/boginis1/FriendFinder">GitHub Repo</a></p>
             </div>
         </footer>
+
+        
+    </div>
         <script type="text/javascript">
+
+
         // Chosen CSS
         var config = {
             ".chosen-select": {},
@@ -174,68 +162,60 @@
             }
         };
 
+
         for (var selector in config) {
             $(selector).chosen(config[selector]);
         }
-
+ 
+           
+           
+       
         // Capture the form inputs
         $("#submit").on("click", function(event) {
-            event.preventDefault();
+        event.preventDefault();
 
-            // Form validation
-            // function validateForm() {
-            //   var isValid = true;
-            //   $(".form-control").each(function() {
-            //     if ($(this).val() === "") {
-            //       isValid = false;
-            //     }
-            //   });
-
-            //   $(".chosen-select").each(function() {
-
-            //     if ($(this).val() === "") {
-            //       isValid = false;
-            //     }
-            //   });
-            //   return isValid;
-            // }
-
-            // // If all required fields are filled
-            // if (validateForm()) {
-            // Create an object for the user"s data
-            var newFriendData = {
-                "name": $("#name").val(),
-                "photo": $("#photo").val(),
-                "scores": [
-                    $("#q1").val(),
-                    $("#q2").val(),
-                    $("#q3").val(),
-                    $("#q4").val(),
-                    $("#q5").val(),
-                    $("#q6").val(),
-                    $("#q7").val(),
-                    $("#q8").val(),
-                    $("#q9").val(),
-                    $("#q10").val()
-                ]
-            };
-            console.log(newFriendData);
-            // AJAX post the data to the friends API.
-            $.post("/api/friends", newFriendData, function(data) {
-
-                // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-                $("#match-name").text(data.name);
-                $("#match-img").attr("src", data.photo);
-
-                // Show the modal with the best match
-                $("#results-modal").modal("toggle");
-
-            });
-        })
-        // else {
-        //     alert("Please fill out all fields before submitting!");
-        // }
         
+        //Here we list the survey input
+        var userInput = {
+            name: $("#name").val(),
+            photo: $("#photo").val(),
+            scores: [
+                $("#q1").val(),
+                $("#q2").val(),
+                $("#q3").val(),
+                $("#q4").val(),
+                $("#q5").val(),
+                $("#q6").val(),
+                $("#q7").val(),
+                $("#q8").val(),
+                $("#q9").val(),
+                $("#q10").val()
+            ]
+        };
+        userInput.totalScore = userInput.scores.reduce(function (accumulator,currentValue){
+            return parseInt(accumulator) + parseInt(currentValue);
+        })
+        console.log("UserInput = " + JSON.stringify(userInput));
+        // AJAX post the data to the friends API.
+        $.ajax({
+            url:"/api/friends", 
+            method: "post",
+            data: userInput
+        }).then (function(data){
+
+        })
+    });
+        //$.post("/api/friends", userInput, function(data){
+        // Set the name and image values of friend match
+        //         $('#userMatch').html(data.matchName);
+        //         $("#userMatchImage").attr("src", data.matchImage);
+        //         // Pop open the modal dialog
+        //         $('#modal1').modal('open');
+        //     });
+        // });
+    
+
+
         </script>
 </body>
 

@@ -1,13 +1,10 @@
-// Your survey should have 10 questions of your choosing. Each answer should be on a scale of 1 to 5 based on how much the user agrees or disagrees with a question.
-
-
-
 
 
 // Determine the user's most compatible friend using the following as a guide:
 
 // Convert each user's results into a simple array of numbers (ex: [5, 1, 4, 4, 5, 1, 2, 5, 4, 1]).
-// With that done, compare the difference between current user's scores against those from other users, question by question. Add up the differences to calculate the totalDifference.
+// With that done, compare the difference between current user's scores 
+//against those from other users, question by question. Add up the differences to calculate the totalDifference.
 
 
 // Example: 
@@ -28,50 +25,41 @@
 
 // The modal should display both the name and picture of the closest match. 
 
-// Dependencies
-// =============================================================
+// ==============================================================================
+// DEPENDENCIES
+// Series of npm packages that we will use to give our server useful functionality
+// ==============================================================================
+
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 var fs = require('fs');
-// Sets up the Express App
-// =============================================================
-
-   
-   
-   
+// ==============================================================================
+// EXPRESS CONFIGURATION
+// This sets up the basic properties for our express server
 var app = express();
+
+// Sets an initial port. We"ll use this later in our listener
 var PORT = process.env.PORT || 3000;
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// ================================================================================
+// ROUTER
+// The below points our server to a series of "route" files.
+// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
+// ================================================================================
+
 require('./app/routing/htmlRoutes.js')(app);
 require('./app/routing/apiRoutes.js')(app);
 
-// Basic route that sends the user first to the AJAX Page
+// =============================================================================
+// LISTENER
+// The below code effectively "starts" our server
+// =============================================================================
 
-// Search for Specific Character (or all characters) - provides JSON
-// app.get("/api/:tables?", function(req, res) {
-//   var chosen = req.params.tables;
-
-//   if (chosen) {
-//     console.log(chosen);
-
-//     for (var i = 0; i < tables.length; i++) {
-//       if (chosen === tables[i].routeName) {
-//         return res.json(tables[i]);
-//       }
-//     }
-//     return res.json(false);
-//   }
-//   return res.json(tables);
-// });
-
-
-
-// Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
