@@ -9,8 +9,8 @@ Friend Finder is a full stack node app deployed on Heroku. Data is saved on a fi
 ### Who will use this?
 Casual users looking to see who they best resemble will enjoy the app. A community of friends, co-workers, or students can compare their interests to each other as well.
 
-# Deployment
+### Deployment
 Deployment on a node server is required. This app is setup to listen on a Heroku default port; in the absence of Heroku, it sets the port to 8080 instead. Since no database management is required, setup should be a simple matter of simply uploading the files and having the server listen for a request.
 
-# Credits
+### Credits
 Holly Zoba, sole developer
